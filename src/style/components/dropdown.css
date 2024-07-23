@@ -1,0 +1,20 @@
+.menu_bar {
+    display: flex;
+    justify-content: space-between;
+    border: solid black 1px;
+    border-radius: 2px;
+}
+
+.arrowIcon {
+    width: 20px;
+}
+
+.menu_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    max-height: 100px;
+    overflow: scroll;
+    position: absolute;
+    background-color: white;
+}
