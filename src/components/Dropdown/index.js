@@ -2,10 +2,9 @@ import "../../style/components/dropdown.css"
 import { useState } from "react"
 import List from "../List"
 
-function Dropdown ({data}) {
+function Dropdown ({data,value,setValue}) {
 
     const [display, setDisplay] = useState( "none" )
-    const [value,setValue] = useState( data[0] ? data[0] : "empty" )
 
     function toggleMenu() {
         if ( display === "none") {
@@ -22,7 +21,7 @@ function Dropdown ({data}) {
     }
 
     return (
-        <div>
+        <div className="dropdown">
             <div className="menu_bar" onClick={toggleMenu}>
                 {value}
                 <img src="/assets/down-arrow.png" className="arrowIcon" alt="Icone de menu déroulant"/>

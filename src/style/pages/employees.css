@@ -1,3 +1,70 @@
+#employee-div {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.pageTitle {
+    font-size: 26px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: solid 2px black;
+    border-radius: 10px;
+    width: 400px;
+    height: 60px;
+    align-self: center;
+}
+
 table {
-    border: solid 1 px black;
+    border: solid 1px black;
+}
+
+.input-group {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+.searchBar {
+    height: 30px;
+    font-size: 16px;
+}
+
+.rdt_TableHeadRow {
+    border-bottom: none !important;
+}
+
+.rdt_TableRow {
+    border-bottom: none !important;
+}
+
+.rdt_TableRow:hover {
+    background-color: #F6F6F6;
+}
+
+.homeArea {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.homeBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    margin-top: 20px;
+    text-decoration: none;
+    border: solid 2px black;
+    border-radius: 5px;
+    transition: 0.2s ease-in;
+    flex: 100% 1 1;
+    max-width: 250px;
+    height: 70px;
+}
+
+.homeBtn:hover {
+    color: white !important;
+    background-color: black;
 }

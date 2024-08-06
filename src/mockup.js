@@ -1,11 +1,11 @@
-export const data = [
+export const mockup = [
     {
         firstName:"Jesuis",
         lastName:"Untest",
         startDate:"01/01/1999",
         department:"Sales",
-        birthday:"01/01/1969",
-        steet:"Main street",
+        birthDay:"01/01/1969",
+        street:"Main street",
         city:"Test city",
         state:"California",
         zipcode:"99999"
@@ -15,8 +15,8 @@ export const data = [
         lastName:"AAA",
         startDate:"01/01/1990",
         department:"Sales",
-        birthday:"01/01/1960",
-        steet:"Main street",
+        birthDay:"01/01/1960",
+        street:"Main street",
         city:"Test city",
         state:"California",
         zipcode:"99999"
@@ -26,8 +26,8 @@ export const data = [
         lastName:"BBB",
         startDate:"01/01/2010",
         department:"Sales",
-        birthday:"01/01/1980",
-        steet:"Main street",
+        birthDay:"01/01/1980",
+        street:"Main street",
         city:"Test city",
         state:"California",
         zipcode:"99999"

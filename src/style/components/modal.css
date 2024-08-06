@@ -1,5 +1,5 @@
 .modal {
-    height: 300px;
+    height: 150px;
     position: absolute;
     display: flex;
     justify-content: center;
@@ -8,11 +8,21 @@
     right: 0;
     top: 0;
     bottom: 0;
-    width: 20%;
+    margin: auto;
+    width: 30%;
+    background-color: white;
+    border: solid 3px black;
+    border-radius: 10px;
 }
 
-.modal_closeBtn {}
+.modal_closeBtn {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+}
 
 .modal_closeBtn img {
+    background-color: white;
     width: 40px;
+    cursor: pointer;
 }

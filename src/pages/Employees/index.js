@@ -1,72 +1,71 @@
 import "../../style/pages/employees.css"
 import React from "react"
+import { useState } from "react"
+import { mockup } from "../../mockup"
+import { tableStyle } from "./dataTable.js"
 import { Link } from "react-router-dom"
-import { useTable } from "react-table"
-import {data} from "../../mockup.js"
+import DataTable from "react-data-table-component"
+
+const columns = [
+    {name:"First Name", selector: row => row.firstName, sortable: true},
+    {name:"LastName", selector: row => row.lastName,sortable: true},
+    {name:"StartDate", selector: row => row.startDate,sortable: true},
+    {name:"Department", selector: row => row.department,sortable: true},
+    {name:"BirthDay", selector: row => row.birthDay,sortable: true},
+    {name:"Street", selector: row => row.street,sortable: true},
+    {name:"City", selector: row => row.city,sortable: true},
+    {name:"State", selector: row => row.state,sortable: true},
+    {name:"Zipcode", selector: row => row.zipcode,sortable: true}
+]
 
 function Employees () {
 
-    const columns = React.useMemo(
-        () => [
-            {Header:"First Name", accessor:"firstName"},
-            {Header:"Last Name", accessor:"lastName"},
-            {Header:"Start Date", accessor:"startDate"},
-            {Header:"Department", accessor:"department"},
-            {Header:"Birthday", accessor:"dateOfBirth"},
-            {Header:"Street", accessor:"street"},
-            {Header:"City", accessor:"city"},
-            {Header:"State", accessor:"state"},
-            {Header:"Zipcode", accessor:"zipcode"}
-        ],
-        []
-    )
+    const employees = JSON.parse(localStorage.getItem("employees"))
+    const [data, setData] = useState(employees)
 
-    const tableInstance = useTable({columns,data})
+    const handleSearch = (e) => {
+        const searchTerm = e.target.value.toLowerCase();
 
-    const {
-            getTableProps,
-            getTableBodyProps,
-            headerGroups,
-            rows,
-            prepareRow,
-        } = tableInstance
+        const newRows = mockup.filter(row => 
+            (row.firstName && row.firstName.toString().toLowerCase().includes(searchTerm)) ||
+            (row.lastName && row.lastName.toString().toLowerCase().includes(searchTerm)) ||
+            (row.startDate && row.startDate.toString().toLowerCase().includes(searchTerm)) ||
+            (row.department && row.department.toString().toLowerCase().includes(searchTerm)) ||
+            (row.birthDay && row.birthDay.toString().toLowerCase().includes(searchTerm)) ||
+            (row.street && row.street.toString().toLowerCase().includes(searchTerm)) ||
+            (row.city && row.city.toString().toLowerCase().includes(searchTerm)) ||
+            (row.state && row.state.toString().toLowerCase().includes(searchTerm)) ||
+            (row.zipcode && row.zipcode.toString().toLowerCase().includes(searchTerm))
+        );
+
+        setData(newRows);
+    };
 
     return (
-        <body>
-        <div id="employee-div" class="container">
-            <h3>Current Employees</h3>
-            <table {...getTableProps()}>
-                <thead>
-                    {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps()}>
-                                    {column.render('Header')}
-                                </th>
-                            ))}
-                        </tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                {rows.map(row => {
-                    prepareRow(row)
-                    return (
-                    <tr {...row.getRowProps()}>
-                        {row.cells.map(cell => {
-                        return (
-                            <td {...cell.getCellProps()}>
-                                {cell.render('Cell')}
-                            </td>
-                        )
-                        })}
-                    </tr>
-                    )
-                })}
-                </tbody>
-            </table>
-            <Link to="/">Home</Link>
+        <div>
+            <div id="employee-div">
+                <h3 className="pageTitle">Current Employees</h3>
+                <div className="input-group">
+                    <input
+                        type="search"
+                        className="form-control-sm border ps-3 searchBar"
+                        placeholder="Search"
+                        onChange={handleSearch}
+                    />
+                </div>
+                <DataTable
+                    columns={columns} 
+                    data={data}
+                    customStyles={tableStyle}
+                    pagination
+                />
+            </div>
+            <div className="homeArea">
+                <Link to="/" className="homeBtn">
+                    Back to homepage
+                </Link>
+            </div>
         </div>
-    </body>
     )
 }
 
