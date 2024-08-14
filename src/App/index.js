@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
 import { store } from './store';
-import { HashRouter as Router, Routes , Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes , Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Employees from '../pages/Employees';
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -8,7 +8,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 function App() {
   return (
     <Provider store={store}>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path='/' element={ <Home /> }/>
           <Route path='/employees' element = { <Employees /> } />
