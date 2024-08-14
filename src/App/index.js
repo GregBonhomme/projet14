@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
 import { store } from './store';
-import { BrowserRouter as Router, Routes , Route } from 'react-router-dom';
+import { HashRouter as Router, Routes , Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Employees from '../pages/Employees';
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
