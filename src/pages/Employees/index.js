@@ -1,7 +1,6 @@
 import "../../style/pages/employees.css"
 import React from "react"
 import { useState } from "react"
-import { mockup } from "../../mockup"
 import { tableStyle } from "./dataTable.js"
 import { Link } from "react-router-dom"
 import DataTable from "react-data-table-component"
@@ -18,15 +17,14 @@ const columns = [
     {name:"Zipcode", selector: row => row.zipcode,sortable: true}
 ]
 
-function Employees () {
+function Employees ({database}) {
 
-    const employees = JSON.parse(localStorage.getItem("employees"))
-    const [data, setData] = useState(employees)
+    const [employees,setEmployees] = useState(database)
 
     const handleSearch = (e) => {
         const searchTerm = e.target.value.toLowerCase();
 
-        const newRows = mockup.filter(row => 
+        const newRows = database.filter(row => 
             (row.firstName && row.firstName.toString().toLowerCase().includes(searchTerm)) ||
             (row.lastName && row.lastName.toString().toLowerCase().includes(searchTerm)) ||
             (row.startDate && row.startDate.toString().toLowerCase().includes(searchTerm)) ||
@@ -38,7 +36,7 @@ function Employees () {
             (row.zipcode && row.zipcode.toString().toLowerCase().includes(searchTerm))
         );
 
-        setData(newRows);
+        setEmployees(newRows);
     };
 
     return (
@@ -55,7 +53,7 @@ function Employees () {
                 </div>
                 <DataTable
                     columns={columns} 
-                    data={data}
+                    data={employees}
                     customStyles={tableStyle}
                     pagination
                 />

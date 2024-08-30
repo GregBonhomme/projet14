@@ -2,19 +2,14 @@ import "../../style/pages/home.css"
 import { Link } from "react-router-dom"
 import { useState,useRef } from "react"
 import DatePicker from "react-datepicker"
-import Dropdown from "../../components/Dropdown"
+import DropdownMenu from "ddmenugb"
 import Modal from "../../components/Modal/index.js"
 import {states} from "../../states.js"
 import {departments} from "../../departments.js"
 import "react-datepicker/dist/react-datepicker.css"
-import {mockup} from "../../mockup.js"
 
-function Home () {
+function Home ({database, setDatabase}) {
 
-    if (!localStorage.getItem("employees")) {
-        localStorage.setItem("employees",JSON.stringify(mockup))
-    }
-    const employees = JSON.parse(localStorage.getItem("employees"))
     const firstName = useRef();
     const lastName = useRef();
     const street = useRef();
@@ -26,22 +21,28 @@ function Home () {
     const [department,setDepartment] = useState(departments? departments[0] : "empty")
     const [isModalOpened,setModalOpened] = useState(false)
 
-    const handleClick = () => {
+    const formatDate = (date) => {
+        date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit"
+        })
+    }
 
+    const handleClick = () => {
         const employee = {
             firstName: firstName.current.value,
             lastName: lastName.current.value,
-            startDate: startDate,
+            startDate: formatDate(startDate),
             department:department,
-            birthDay: birthDay,
+            birthDay: formatDate(birthDay),
             street:street.current.value,
             city:city.current.value,
             state:state,
             zipcode:zipCode.current.value
         }
-        employees.push(employee)
-        localStorage.setItem("employees",JSON.stringify(employees))
-        console.log(employees)
+        setDatabase([...database,employee])
+        console.log(database)
         
         if ( isModalOpened === false ) {
             setModalOpened(true)
@@ -87,7 +88,7 @@ function Home () {
                             <input id="city" type="text" ref={city}/>
 
                             <div className="label">State</div>
-                            <Dropdown data={states} value={state} setValue={setState}/>
+                            <DropdownMenu data={states} value={state} setValue={setState}/>
 
                             <div className="label">Zip Code</div>
                             <input id="zip-code" type="number" ref={zipCode}/>
@@ -95,7 +96,7 @@ function Home () {
 
                         <div className="form_element">
                             <div className="label">Department</div>
-                            <Dropdown data={departments} value={department} setValue={setDepartment}/>
+                            <DropdownMenu data={departments} value={department} setValue={setDepartment}/>
                         </div>
                     </form>
 

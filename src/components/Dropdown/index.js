@@ -24,7 +24,7 @@ function Dropdown ({data,value,setValue}) {
         <div className="dropdown">
             <div className="menu_bar" onClick={toggleMenu}>
                 {value}
-                <img src="/assets/down-arrow.png" className="arrowIcon" alt="Icone de menu déroulant"/>
+                <img src="./assets/down-arrow.png" className="arrowIcon" alt="Icone de menu déroulant"/>
             </div>
             <div className="menu_content" style={{display:display}} onClick={handleClick}>
                 <List list={data} />
